@@ -10,24 +10,18 @@ This workflow automates the loop of receiving human input from the Chat Interfac
 
 ## 🏁 Steps
 
-### 1. Wait for Human Input
+### 1. User Sends Input via UI
 
-Use the command status to monitor if a new message has arrived at the API Hub.
+When you type a message in the Chat interface and click **Send**, the UI automatically sends a POST request to the Bridge Hub (`/api/messages`) with `role: "user"`.
 
-```bash
-# Check bridge status and connected clients
-curl -s http://localhost:3002/status
-```
-
-### 2. Invoke AI Agent (Claude Code Runner)
+### 2. Bridge Triggers AI Agent (Claude Code Runner)
 
 // turbo
-Pass the latest human input to a specialized agent that has the `chat-bridge-mcp` tools enabled.
+The Hub (or a monitoring script) detects the new user message and invokes the **Claude Code Runner** agent. The agent then reads the message and prepares a response.
 
 ```bash
-# Run the agent with context of the chat bridge
-# Replace [INPUT] with the actual user message
-mcp-run chat-bridge-mcp "Analyze and reply to the user via the bridge: [INPUT]"
+# Example of how the bot is called with the user input
+mcp-run chat-bridge-mcp "Reply to this customer: [LATEST_USER_MESSAGE]"
 ```
 
 ### 3. Verify Message Delivery

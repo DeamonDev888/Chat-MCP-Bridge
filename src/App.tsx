@@ -78,20 +78,33 @@ function App() {
     };
   }, []);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
 
+    const userMessageContent = input;
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
-      content: input,
+      content: userMessageContent,
       timestamp: new Date(),
     };
 
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
 
-    // Simulate AI response connection for now (can be removed if full bidirectional is needed)
+    // Send the message to the Bridge API so the Agent can "hear" it
+    try {
+      await fetch('/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: userMessageContent,
+          role: 'user'
+        })
+      });
+    } catch (err) {
+      console.error('Failed to send message to bridge', err);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
