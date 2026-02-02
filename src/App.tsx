@@ -42,15 +42,15 @@ function App() {
   useEffect(() => {
     // SSE (Server-Sent Events) Connection
     // Connection via /api proxy to avoid CORS issues
-    const eventSource = new EventSource('/api/events');
+    const eventSource = new EventSource("/api/events");
 
     eventSource.onopen = () => {
-      console.log('Connected to MCP Bridge (SSE)');
+      console.log("Connected to MCP Bridge (SSE)");
       setIsConnected(true);
     };
 
     eventSource.onerror = (err) => {
-      console.log('Disconnected from MCP Bridge (SSE)', err);
+      console.log("Disconnected from MCP Bridge (SSE)", err);
       // Don't set isConnected to false immediately if you want to avoid flickering,
       // but strictly speaking, it is disconnected.
       if (eventSource.readyState === EventSource.CLOSED) {
@@ -65,11 +65,11 @@ function App() {
           id: payload.id,
           role: payload.role,
           content: payload.content,
-          timestamp: new Date(payload.timestamp)
+          timestamp: new Date(payload.timestamp),
         };
         setMessages((prev) => [...prev, newMsg]);
       } catch (err) {
-        console.error('Failed to parse SSE message', err);
+        console.error("Failed to parse SSE message", err);
       }
     };
 
@@ -94,16 +94,16 @@ function App() {
 
     // Send the message to the Bridge API so the Agent can "hear" it
     try {
-      await fetch('/api/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      await fetch("/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message: userMessageContent,
-          role: 'user'
-        })
+          role: "user",
+        }),
       });
     } catch (err) {
-      console.error('Failed to send message to bridge', err);
+      console.error("Failed to send message to bridge", err);
     }
   };
 

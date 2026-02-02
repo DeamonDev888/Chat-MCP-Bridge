@@ -3,16 +3,19 @@
 import { FastMCP } from "fastmcp";
 import { z } from "zod";
 
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from "fs";
+import * as path from "path";
 
 // Debug Log
-const LOG_FILE = 'C:\\Users\\Deamon\\Desktop\\Backup\\Serveur MCP\\chat_mcp\\server\\mcp.log';
+const LOG_FILE =
+  "C:\\Users\\Deamon\\Desktop\\Backup\\Serveur MCP\\chat_mcp\\server\\mcp.log";
 function log(msg: string) {
   try {
-     fs.writeFileSync(LOG_FILE, `[${new Date().toISOString()}] ${msg}\n`, { flag: 'a' });
+    fs.writeFileSync(LOG_FILE, `[${new Date().toISOString()}] ${msg}\n`, {
+      flag: "a",
+    });
   } catch (e) {
-     // console.error("Log failed", e);
+    // console.error("Log failed", e);
   }
 }
 
@@ -52,20 +55,28 @@ server.addTool({
       }
 
       const data = await response.json();
-      
+
       return {
         content: [
-          { type: "text", text: `Message sent via Bridge! (${data.clients} clients online)` },
+          {
+            type: "text",
+            text: `Message sent via Bridge! (${data.clients} clients online)`,
+          },
         ],
       };
     } catch (error) {
-       // Fallback: Log to stderr if API is down
-       console.error(`[Bridge Error] Could not connect to Chat API: ${(error as Error).message}`);
-       return {
+      // Fallback: Log to stderr if API is down
+      console.error(
+        `[Bridge Error] Could not connect to Chat API: ${(error as Error).message}`,
+      );
+      return {
         content: [
-          { type: "text", text: `Error: Could not connect to Chat Interface. Is the app running? (${(error as Error).message})` },
+          {
+            type: "text",
+            text: `Error: Could not connect to Chat Interface. Is the app running? (${(error as Error).message})`,
+          },
         ],
-        isError: true
+        isError: true,
       };
     }
   },
@@ -77,28 +88,28 @@ server.addTool({
   parameters: z.object({}),
   execute: async () => {
     try {
-        const response = await fetch(`${API_URL}/status`);
-        if (!response.ok) throw new Error("API unreachable");
-        
-        const data = await response.json();
-        return {
+      const response = await fetch(`${API_URL}/status`);
+      if (!response.ok) throw new Error("API unreachable");
+
+      const data = await response.json();
+      return {
         content: [
-            {
+          {
             type: "text",
             text: `Bridge Status: ONLINE ✅\nConnected Frontends: ${data.clients}\nUptime: ${Math.floor(data.uptime)}s`,
-            },
+          },
         ],
-        };
+      };
     } catch (error) {
-        return {
-            content: [
-                {
-                type: "text",
-                text: "Bridge API is OFFERLINE ❌ (Is the React App/Server running?)",
-                },
-            ],
-            isError: true
-        };
+      return {
+        content: [
+          {
+            type: "text",
+            text: "Bridge API is OFFERLINE ❌ (Is the React App/Server running?)",
+          },
+        ],
+        isError: true,
+      };
     }
   },
 });
@@ -114,7 +125,7 @@ async function main() {
     process.exit(1);
   }
   console.error("Chat Bridge MCP Client running (Stdio Mode)...");
-  
+
   // Keep process alive
   setInterval(() => {}, 10000);
 }
