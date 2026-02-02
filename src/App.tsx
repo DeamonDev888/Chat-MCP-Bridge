@@ -119,7 +119,7 @@ function App() {
             </div>
             <div>
               <h1 className="font-bold text-lg tracking-tight bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                Antigravity AI
+                Chat-MCP AI
               </h1>
               <div className="flex items-center gap-1.5">
                 <span
@@ -224,7 +224,7 @@ function App() {
           </div>
           <div className="text-center mt-2">
             <p className="text-[10px] text-gray-600">
-              Antigravity AI can make mistakes. Consider checking important
+              Chat-MCP AI can make mistakes. Consider checking important
               information.
             </p>
           </div>

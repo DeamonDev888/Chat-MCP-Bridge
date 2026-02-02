@@ -4,7 +4,7 @@ description: Automated Input Processor for Chat-MCP
 
 // turbo-all
 
-# 🌌 Antigravity Chat-MCP Bridge Workflow
+# 🌌 Chat-MCP Bridge Workflow
 
 This workflow automates the loop of receiving human input from the Chat Interface, processing it via an AI Agent, and broadcasting the response back to the bridge.
 
