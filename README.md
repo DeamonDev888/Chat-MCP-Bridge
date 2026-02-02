@@ -1,4 +1,4 @@
-# 🌌 Antigravity Chat - Decoupled MCP Bridge
+# Chat-MCP Bridge - Decoupled System
 
 ![Banner](./assets/banner.png)
 
@@ -35,8 +35,8 @@ The system is split into three independent layers:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/antigravity-chat.git
-cd antigravity-chat
+git clone https://github.com/DeamonDev888/Chat-MCP-Bridge.git
+cd Chat-MCP-Bridge
 
 # Install dependencies for both Hub and Server
 pnpm install

@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 
 /**
- * Antigravity Workspace Orchestrator
+ * Chat-MCP Workspace Orchestrator
  * This script handles the full workflow for the decoupled MCP project.
  */
 
@@ -21,7 +21,7 @@ function run(command: string, cwd: string = ROOT) {
 }
 
 async function workflow() {
-    console.log("🌌 Starting Antigravity Workflow...");
+    console.log("🌌 Starting Chat-MCP Workflow...");
 
     // 1. Clean
     console.log("\n🧹 Step 1: Cleaning Workspace...");
