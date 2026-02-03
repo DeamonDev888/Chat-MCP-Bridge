@@ -4,14 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite\" \"tsx watch api/index.ts\"",
-    "start": "concurrently \"vite preview\" \"tsx api/index.ts\"",
+    "dev": "concurrently \"vite\" \"tsx watch api/index.ts\" \"cd server && npm run dev\"",
+    "start": "concurrently \"vite preview\" \"tsx api/index.ts\" \"cd server && npm start\"",
     "build": "tsc -b && vite build && cd server && npm run build",
-    "lint": "eslint . && cd server && echo 'Linting server not configured yet'",
+    "lint": "eslint . && cd server && npm run lint || echo 'Server linting skipped'",
     "format": "prettier --write src/**/*.{ts,tsx,css} && cd server && prettier --write src/**/*.ts",
     "preview": "vite preview",
     "dev:client": "vite",
     "dev:server": "tsx api/index.ts",
+    "dev:mcp": "cd server && npm run dev",
     "workflow": "tsx scripts/workflow.ts"
   },
   "dependencies": {

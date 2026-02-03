@@ -35,7 +35,7 @@ The system is split into three independent layers:
 
 ```bash
 # Clone the repository
-git clone https://github.com/DeamonDev888/Chat-MCP-Bridge.git
+git clone https://github.com/Nexus-AI/Chat-MCP-Bridge.git
 cd Chat-MCP-Bridge
 
 # Install dependencies for both Hub and Server
@@ -65,7 +65,7 @@ Add the following to your `mcp_config.json`:
   "mcpServers": {
     "chat-bridge-mcp": {
       "command": "node",
-      "args": ["C:/path/to/project/chat_mcp/server/dist/index.js"]
+      "args": ["${PROJECT_ROOT}/chat_mcp/server/dist/index.js"]
     }
   }
 }

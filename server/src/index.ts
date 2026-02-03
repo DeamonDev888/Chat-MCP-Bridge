@@ -7,15 +7,14 @@ import * as fs from "fs";
 import * as path from "path";
 
 // Debug Log
-const LOG_FILE =
-  "C:\\Users\\Deamon\\Desktop\\Backup\\Serveur MCP\\chat_mcp\\server\\mcp.log";
+const LOG_FILE = path.join(process.cwd(), "mcp.log");
 function log(msg: string) {
   try {
     fs.writeFileSync(LOG_FILE, `[${new Date().toISOString()}] ${msg}\n`, {
       flag: "a",
     });
-  } catch (e) {
-    // console.error("Log failed", e);
+  } catch {
+    // console.error("Log failed");
   }
 }
 
@@ -100,7 +99,7 @@ server.addTool({
           },
         ],
       };
-    } catch (error) {
+    } catch {
       return {
         content: [
           {

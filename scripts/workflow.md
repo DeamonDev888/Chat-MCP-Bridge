@@ -1,46 +1,57 @@
 ---
-description: Automated Input Processor for Chat-MCP
+description: Advanced Orchestration Workflow for Chat-MCP
 ---
 
 // turbo-all
 
-# 🌌 Chat-MCP Bridge Workflow
+# 🌌 Chat-MCP Bridge: Intelligence Workflow
 
-This workflow automates the loop of receiving human input from the Chat Interface, processing it via an AI Agent, and broadcasting the response back to the bridge.
+This document outlines the automated intelligence loop. It describes how human input is captured, processed by the **Sentient Orchestrator**, and handled by specialized AI Agents via the Machine Context Protocol.
 
-## 🏁 Steps
+## 🏁 The Intelligence Loop
 
-### 1. User Sends Input via UI
+### 1. Vector Hub: Capturing Human Input
 
 ![Step 1 - UI Input](../assets/workflow_1.png)
 
-When you type a message in the Chat interface and click **Send**, the UI automatically sends a POST request to the Bridge Hub (`/api/messages`) with `role: "user"`.
+The React interface acts as the primary sensory organ. When a user transmits a signal (message):
 
-### 2. Bridge Triggers AI Agent (Claude Code Runner)
+1. The UI generates a **POST** request to the Hub (`/api/messages`).
+2. The Hub broadcasts the signal via **SSE (Server-Sent Events)** to all active listeners.
+
+### 2. Sentient Orchestrator: Event Monitoring
 
 // turbo
-The Hub (or a monitoring script) detects the new user message and invokes the **Claude Code Runner** agent. The agent then reads the message and prepares a response.
+The **Orchestrator Script** (`scripts/workflow.ts`) maintains a persistent connection to the Hub's event stream. It acts as the gateway between the human interface and the AI's cognitive center.
 
-```bash
-# Example of how the bot is called with the user input
-mcp-run chat-bridge-mcp "Reply to this customer: [LATEST_USER_MESSAGE]"
-```
+**Process Execution:**
 
-### 3. Verify Message Delivery & Live Stream
+- **Signal Detection:** The script identifies new `user` messages in real-time.
+- **Agent Invocation:** It triggers the **Claude Code Runner** (or selected agent) with the latest context.
+- **Command Injection:**
+  ```powershell
+  # The orchestrator executes the agent via the runner
+  mcp-run chat-bridge-mcp "Analyze and respond to signal: [LATEST_MESSAGE]"
+  ```
+
+### 3. Machine Response: Feedback Loop
 
 ![Step 3 - Event Stream](../assets/workflow_3.png)
 
 // turbo
-Check the bridge server logs to ensure the agent successfully called the `send_chat_message` tool. The response is then streamed back to the UI interface in real-time.
+The AI Agent, once invoked, utilizes the `send_chat_message` tool provided by the `chat-bridge-mcp` server. This ensures the response is injected back into the Hub and displayed on the UI instantly.
+
+**Validation:**
+Ensure the Hub acknowledges the broadcast by monitoring the server logs:
 
 ```bash
-# Verify log entry for broadcast
-tail -n 5 server/mcp.log
+# Monitor the real-time broadcast frequency
+tail -n 20 server/mcp.log
 ```
 
-## 🛠️ Automated Execution Guide
+## 🛠️ Deployment & Execution
 
-To run this workflow continuously in the background, you can use the orchestrator:
+To activate the fully automated intelligence loop, run the orchestrator in persistent mode:
 
 ```bash
 pnpm workflow
@@ -48,4 +59,4 @@ pnpm workflow
 
 ---
 
-_Generated for DeamonDev888 / Chat-MCP-Bridge_
+_Protocol established for Nexus-AI / Chat-MCP-Bridge_
